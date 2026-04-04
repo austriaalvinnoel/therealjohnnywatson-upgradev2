@@ -19,60 +19,59 @@ const ShowsSection = () => {
 
   const [shows, setShows] = useState<ShowType[]>([]);
 
-  useEffect(() => {
-    const fetchShows = async () => {
-      try {
-        const res = await axios.get(
-          "https://www.googleapis.com/calendar/v3/calendars/alvinnoel@gmail.com/events",
-          {
-            params: {
-              key: "AIzaSyAtcsM53mC29a_R5IUlAktq-Tg_GwusClI",
-              singleEvents: true,
-              orderBy: "startTime",
-              timeMin: new Date().toISOString(),
-            },
-          }
+ useEffect(() => {
+  const fetchShows = async () => {
+    try {
+      const res = await axios.get(
+        "https://www.googleapis.com/calendar/v3/calendars/alvinnoel@gmail.com/events",
+        {
+          params: {
+            key: "AIzaSyAtcsM53mC29a_R5IUlAktq-Tg_GwusClI",
+            singleEvents: true,
+            orderBy: "startTime",
+            timeMin: new Date().toISOString(),
+          },
+        }
+      );
+
+      const formatted = (res.data.items || []).map((event: any) => {
+        const dateObj = new Date(
+          event.start?.dateTime || event.start?.date
         );
 
-        const formatted = res.data.items.map((event: any) => {
-          const dateObj = new Date(
-            event.start.dateTime || event.start.date
-          );
+        const desc = (event.description || "").toLowerCase();
 
-          const desc = event.description || "";
+        // ✅ smarter status detection
+        let status = "available";
+        if (desc.includes("soldout")) status = "soldout";
+        else if (desc.includes("limited")) status = "limited";
 
-          const status = desc.includes("soldout")
-            ? "soldout"
-            : desc.includes("limited")
-            ? "limited"
-            : "available";
+        // ✅ safer ticket extraction
+        const ticketMatch = desc.match(/ticket:(.*)/i);
+        const ticket = ticketMatch ? ticketMatch[1].trim() : "#";
 
-          const ticketMatch = desc.match(/ticket:(.*)/);
-          const ticket = ticketMatch ? ticketMatch[1].trim() : "#";
+        return {
+          id: event.id,
+          venue: event.summary || "Untitled Show",
+          city: event.location || "Location TBA",
+          date: dateObj.toLocaleDateString(),
+          time: dateObj.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          status,
+          ticket,
+        };
+      });
 
-          return {
-            id: event.id,
-            venue: event.summary,
-            city: event.location || "TBA",
-            date: dateObj.toLocaleDateString(),
-            time: dateObj.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            }),
-            status,
-            ticket,
-          };
-        });
+      setShows(formatted);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
 
-        setShows(formatted);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
-
-    fetchShows();
-  }, []);
-
+  fetchShows();
+}, []);
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "available":
