@@ -17,17 +17,19 @@ const ShowsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const [shows, setShows] = useState<ShowType[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchShows = async () => {
       try {
         const res = await fetch(
-          `https://www.googleapis.com/calendar/v3/calendars/alvinnoel@gmail.com/events?key=AIzaSyAtcsM53mC29a_R5IUlAktq-Tg_GwusClI&singleEvents=true&orderBy=startTime&timeMin=${new Date().toISOString()}`
+          `https://www.googleapis.com/calendar/v3/calendars/alvinnoel@gmail.com/events?key=AIzaSyAtcsM53mC29a_R5IUlAktq-Tg_GwusClI&singleEvents=true&orderBy=startTime&timeMin=2020-01-01T00:00:00Z`
         );
 
         const data = await res.json();
 
-        console.log("EVENTS:", data.items); // 👈 DEBUG
+        console.log("FULL RESPONSE:", data); // 🔥 DEBUG
+        console.log("EVENTS:", data.items); // 🔥 DEBUG
 
         const formatted = (data.items || []).map((event: any) => {
           const dateObj = new Date(
@@ -57,9 +59,13 @@ const ShowsSection = () => {
           };
         });
 
+        console.log("FORMATTED:", formatted); // 🔥 DEBUG
+
         setShows(formatted);
       } catch (error) {
         console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -110,13 +116,21 @@ const ShowsSection = () => {
           </p>
         </motion.div>
 
-        {/* 👇 SHOW IF NO EVENTS */}
-        {shows.length === 0 && (
+        {/* 🔄 LOADING STATE */}
+        {loading && (
+          <p className="text-center text-muted-foreground">
+            Loading shows...
+          </p>
+        )}
+
+        {/* ❌ NO EVENTS */}
+        {!loading && shows.length === 0 && (
           <p className="text-center text-muted-foreground">
             No upcoming shows yet.
           </p>
         )}
 
+        {/* ✅ SHOW EVENTS */}
         <div className="space-y-4 max-w-4xl mx-auto">
           {shows.map((show, index) => (
             <motion.div
