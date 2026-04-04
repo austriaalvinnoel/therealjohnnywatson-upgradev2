@@ -1,7 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { MapPin, Calendar, Clock, ArrowRight } from "lucide-react";
-import axios from "axios";
 
 type ShowType = {
   id: string;
@@ -19,59 +18,54 @@ const ShowsSection = () => {
 
   const [shows, setShows] = useState<ShowType[]>([]);
 
- useEffect(() => {
-  const fetchShows = async () => {
-    try {
-      const res = await axios.get(
-        "https://www.googleapis.com/calendar/v3/calendars/alvinnoel@gmail.com/events",
-        {
-          params: {
-            key: "AIzaSyAtcsM53mC29a_R5IUlAktq-Tg_GwusClI",
-            singleEvents: true,
-            orderBy: "startTime",
-            timeMin: new Date().toISOString(),
-          },
-        }
-      );
-
-      const formatted = (res.data.items || []).map((event: any) => {
-        const dateObj = new Date(
-          event.start?.dateTime || event.start?.date
+  useEffect(() => {
+    const fetchShows = async () => {
+      try {
+        const res = await fetch(
+          `https://www.googleapis.com/calendar/v3/calendars/alvinnoel@gmail.com/events?key=AIzaSyAtcsM53mC29a_R5IUlAktq-Tg_GwusClI&singleEvents=true&orderBy=startTime&timeMin=${new Date().toISOString()}`
         );
 
-        const desc = (event.description || "").toLowerCase();
+        const data = await res.json();
 
-        // ✅ smarter status detection
-        let status = "available";
-        if (desc.includes("soldout")) status = "soldout";
-        else if (desc.includes("limited")) status = "limited";
+        console.log("EVENTS:", data.items); // 👈 DEBUG
 
-        // ✅ safer ticket extraction
-        const ticketMatch = desc.match(/ticket:(.*)/i);
-        const ticket = ticketMatch ? ticketMatch[1].trim() : "#";
+        const formatted = (data.items || []).map((event: any) => {
+          const dateObj = new Date(
+            event.start?.dateTime || event.start?.date
+          );
 
-        return {
-          id: event.id,
-          venue: event.summary || "Untitled Show",
-          city: event.location || "Location TBA",
-          date: dateObj.toLocaleDateString(),
-          time: dateObj.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-          status,
-          ticket,
-        };
-      });
+          const desc = (event.description || "").toLowerCase();
 
-      setShows(formatted);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
+          let status = "available";
+          if (desc.includes("soldout")) status = "soldout";
+          else if (desc.includes("limited")) status = "limited";
 
-  fetchShows();
-}, []);
+          const ticketMatch = desc.match(/ticket:(.*)/i);
+          const ticket = ticketMatch ? ticketMatch[1].trim() : "#";
+
+          return {
+            id: event.id,
+            venue: event.summary || "Untitled Show",
+            city: event.location || "Location TBA",
+            date: dateObj.toLocaleDateString(),
+            time: dateObj.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            status,
+            ticket,
+          };
+        });
+
+        setShows(formatted);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
+    fetchShows();
+  }, []);
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "available":
@@ -112,10 +106,16 @@ const ShowsSection = () => {
             Upcoming <span className="text-gradient-gold">Shows</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Catch Johnny live at a venue near you. From intimate club shows to
-            theater performances, every night is an unforgettable experience.
+            Catch Johnny live at a venue near you.
           </p>
         </motion.div>
+
+        {/* 👇 SHOW IF NO EVENTS */}
+        {shows.length === 0 && (
+          <p className="text-center text-muted-foreground">
+            No upcoming shows yet.
+          </p>
+        )}
 
         <div className="space-y-4 max-w-4xl mx-auto">
           {shows.map((show, index) => (
@@ -170,21 +170,6 @@ const ShowsSection = () => {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12"
-        >
-          <a
-            href="#"
-            className="text-primary hover:text-gold-light transition-colors inline-flex items-center gap-2 font-medium"
-          >
-            View All Shows
-            <ArrowRight size={16} />
-          </a>
-        </motion.div>
       </div>
     </section>
   );
