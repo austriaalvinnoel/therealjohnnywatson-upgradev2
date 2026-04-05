@@ -35,9 +35,11 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "YouTube URL", name: "url", widget: "string" }
-      - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
-      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "YouTube Video ID (e.g. maokkr-WkLk)", name: "youtubeId", widget: "string" }
+      - { label: "Duration (e.g. 1:00)", name: "duration", widget: "string" }
+      - { label: "Views (e.g. 2.1K views)", name: "views", widget: "string" }
+      - { label: "Thumbnail (optional)", name: "thumbnail", widget: "image", required: false }
+      - { label: "Description (optional)", name: "description", widget: "text", required: false }
 
   - name: "testimonials"
     label: "Testimonials"
