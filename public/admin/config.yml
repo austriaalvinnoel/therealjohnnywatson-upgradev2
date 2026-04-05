@@ -1,6 +1,5 @@
 backend:
   name: git-gateway
-  repo: austriaalvinnoel/pgrade-buddy
   branch: main
   auth_endpoint: https://api.netlify.com
 
@@ -16,3 +15,56 @@ collections:
         file: "index.html"
         fields:
           - { label: "Title", name: "title", widget: "string" }
+
+  - name: "shows"
+    label: "Upcoming Shows"
+    folder: "src/content/shows"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Venue", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "City", name: "city", widget: "string" }
+      - { label: "Ticket Link", name: "ticket_url", widget: "string", required: false }
+      - { label: "Notes", name: "notes", widget: "string", required: false }
+
+  - name: "videos"
+    label: "Videos"
+    folder: "src/content/videos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "YouTube URL", name: "url", widget: "string" }
+      - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "src/content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Quote", name: "quote", widget: "text" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Title / Show", name: "source", widget: "string", required: false }
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Contact Info"
+        name: "contact"
+        file: "src/content/contact.json"
+        fields:
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Phone", name: "phone", widget: "string", required: false }
+          - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+          - { label: "Twitter / X URL", name: "twitter", widget: "string", required: false }
+          - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
+      - label: "About / Bio"
+        name: "about"
+        file: "src/content/about.json"
+        fields:
+          - { label: "Short Bio", name: "bio_short", widget: "text" }
+          - { label: "Full Bio", name: "bio_full", widget: "markdown" }
+          - { label: "Profile Photo", name: "photo", widget: "image", required: false }
