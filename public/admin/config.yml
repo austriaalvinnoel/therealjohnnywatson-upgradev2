@@ -1,5 +1,8 @@
+local_backend: false
+
 backend:
-  name: git-gateway
+  name: github
+  repo: austriaalvinnoel/pgrade-buddy
   branch: main
 
 media_folder: "public/images"
