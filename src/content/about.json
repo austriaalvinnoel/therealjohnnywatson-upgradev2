@@ -1,0 +1,10 @@
+{
+  "bio_short": "Johnny Watson is not your average comedian.",
+  "bio_full": "With a career spanning over two decades, he has mastered the art of connecting with audiences through relatable humor and genuine storytelling.\n\nHis unique brand of comedy draws from everyday life experiences, family dynamics, and the absurdities of modern living. Johnny has performed at prestigious venues across the country and has opened for some of the biggest names in comedy.\n\nBeyond the stage, Johnny has garnered attention from Hollywood stars. Adam Ferrara of the acclaimed FX hit 'Rescue Me' and Comedy Central fame has praised his performances, saying Johnny 'always makes me laugh.'",
+  "stats": [
+    { "value": "20+", "label": "Years of Comedy" },
+    { "value": "500K+", "label": "Fans Entertained" },
+    { "value": "1000+", "label": "Shows Performed" },
+    { "value": "100+", "label": "Five-Star Reviews" }
+  ]
+}
