@@ -192,7 +192,7 @@ const ContactSection = () => {
                   <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Event Type</label>
                   <input
                     type="text"
-                    placeholder=""Tell us about your event""
+                    placeholder="Tell us about your event"
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
@@ -202,7 +202,7 @@ const ContactSection = () => {
                 <div>
                   <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Tell Us About Your Event</label>
                   <textarea
-                    placeholder=""Tell us about your event""
+                    placeholder="Tell us about your event"
                     rows={5}
                     required
                     value={formData.message}
