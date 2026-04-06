@@ -26,6 +26,14 @@ collections:
       - { label: "Venue", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "City", name: "city", widget: "string" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Available", value: "available" }
+          - { label: "Limited Seats", value: "limited" }
+          - { label: "Sold Out", value: "soldout" }
+        default: "available"
       - { label: "Ticket Link", name: "ticket_url", widget: "string", required: false }
       - { label: "Notes", name: "notes", widget: "string", required: false }
 
