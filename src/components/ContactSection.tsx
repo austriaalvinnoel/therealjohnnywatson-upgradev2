@@ -28,6 +28,7 @@ const ContactSection = () => {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
+          cc: "thewatsonshow@gmail.com",
         }),
       });
       const data = await response.json();
@@ -206,40 +207,4 @@ const ContactSection = () => {
                 <div>
                   <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Tell Us About Your Event</label>
                   <textarea
-                    placeholder="Date, location, expected audience size, budget range..."
-                    rows={5}
-                    required
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:border-primary focus:outline-none transition-colors resize-none text-sm"
-                  />
-                </div>
-
-                {error && (
-                  <p className="text-red-400 text-sm text-center">
-                    Something went wrong. Please try again or email us directly.
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="btn-gold rounded-sm w-full"
-                >
-                  <Send size={16} className="inline mr-2" />
-                  {submitting ? "Sending..." : "Send Booking Inquiry"}
-                </button>
-
-                <p className="text-xs text-muted-foreground text-center">
-                  We typically respond within 24-48 hours
-                </p>
-              </motion.form>
-            )}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default ContactSection;
+                    placeholder="Date, location, expected
