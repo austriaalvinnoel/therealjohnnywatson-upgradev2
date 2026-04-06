@@ -60,7 +60,7 @@ const ContactSection = () => {
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Available for corporate events, private parties, comedy clubs, and more.
-            Reach out and let's make your event unforgettable.
+            Reach out and make your event unforgettable.
           </p>
         </motion.div>
 
@@ -88,7 +88,6 @@ const ContactSection = () => {
                     </a>
                   </div>
                 </div>
-
                 <div className="flex items-start gap-4">
                   <div className="w-11 h-11 flex items-center justify-center bg-primary/10 rounded-xl flex-shrink-0">
                     <Phone size={18} className="text-primary" />
@@ -100,7 +99,6 @@ const ContactSection = () => {
                     </a>
                   </div>
                 </div>
-
                 <div className="flex items-start gap-4">
                   <div className="w-11 h-11 flex items-center justify-center bg-primary/10 rounded-xl flex-shrink-0">
                     <MapPin size={18} className="text-primary" />
@@ -112,7 +110,6 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-
             <div className="card-theatrical p-6">
               <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-primary mb-4">
                 Available For
@@ -191,7 +188,6 @@ const ContactSection = () => {
                     />
                   </div>
                 </div>
-
                 <div>
                   <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Event Type</label>
                   <input
@@ -203,8 +199,40 @@ const ContactSection = () => {
                     className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:border-primary focus:outline-none transition-colors text-sm"
                   />
                 </div>
-
                 <div>
                   <label className="text-xs text-muted-foreground uppercase tracking-wider mb-2 block">Tell Us About Your Event</label>
                   <textarea
-                    placeholder="Date, location, expected
+                    placeholder="Date, location, expected audience size, budget range..."
+                    rows={5}
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:border-primary focus:outline-none transition-colors resize-none text-sm"
+                  />
+                </div>
+                {error && (
+                  <p className="text-red-400 text-sm text-center">
+                    Something went wrong. Please try again or email us directly.
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="btn-gold rounded-sm w-full"
+                >
+                  <Send size={16} className="inline mr-2" />
+                  {submitting ? "Sending..." : "Send Booking Inquiry"}
+                </button>
+                <p className="text-xs text-muted-foreground text-center">
+                  We typically respond within 24-48 hours
+                </p>
+              </motion.form>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ContactSection;
