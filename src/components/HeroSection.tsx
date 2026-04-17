@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import { Play, Calendar } from "lucide-react";
 import heroImage from "@/assets/hero-comedian.jpg";
 
 const HeroSection = () => {
@@ -8,23 +8,21 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="Johnny Watson on stage"
-          className="w-full h-full object-cover object-center"
+          alt="Johnny Watson performing on stage"
+          className="w-full h-full object-cover object-center scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
       </div>
 
-      {/* Spotlight Effect */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/3 w-[800px] h-[600px] bg-primary/5 blur-[150px] rounded-full" />
+        <div className="absolute top-0 left-1/3 w-[800px] h-[600px] bg-primary/10 blur-[150px] rounded-full" />
       </div>
 
-      {/* Content */}
       <div className="container mx-auto px-6 relative z-10 pt-24">
         <div className="max-w-2xl">
           <motion.p
@@ -40,22 +38,22 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="font-display text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[0.9]"
+            className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[0.95]"
           >
-            <span className="text-foreground">JOHNNY</span>
+            <span className="text-foreground">Johnny</span>
             <br />
-            <span className="text-gradient-gold">WATSON</span>
+            <span className="text-gradient-gold">Watson</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg leading-relaxed"
+            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed"
           >
-            Bringing laughter to audiences across the nation. From intimate
-            comedy clubs to sold-out theaters, experience comedy that hits close
-            to home.
+            Dynamic, relatable, professional, and very, very funny. Live shows,
+            real stories, and unforgettable laughs for comedy clubs, private
+            parties, and corporate audiences.
           </motion.p>
 
           <motion.div
@@ -64,19 +62,23 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <a href="#shows" className="btn-gold rounded-sm">
-              Upcoming Shows
-            </a>
             <a
               href="#videos"
-              className="btn-outline-gold rounded-sm flex items-center justify-center gap-2"
+              className="btn-gold rounded-sm flex items-center justify-center gap-2"
             >
               <Play size={18} />
-              Watch Videos
+              Watch Clips
+            </a>
+
+            <a
+              href="#booking"
+              className="btn-outline-gold rounded-sm flex items-center justify-center gap-2"
+            >
+              <Calendar size={18} />
+              Book Johnny
             </a>
           </motion.div>
 
-          {/* Quote */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -87,27 +89,11 @@ const HeroSection = () => {
               "Johnny Watson always makes me laugh."
             </p>
             <p className="text-primary mt-2 font-medium">
-              — Adam Ferrara, FX's "Rescue Me"
+              — Adam Ferrara, FX&apos;s "Rescue Me"
             </p>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-primary/30 flex items-start justify-center p-2"
-        >
-          <motion.div className="w-1 h-2 bg-primary rounded-full" />
-        </motion.div>
-      </motion.div>
     </section>
   );
 };
