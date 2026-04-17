@@ -12,7 +12,7 @@ const videos = [
     title: "A Nice Guy Who Can Perform Anywhere",
     description:
       "A strong clip for showing booking agents and event organizers the kind of energy Johnny brings to the room.",
-    embedUrl: "https://www.youtube.com/embed/ZrIHaI7OFo",
+    embedUrl: "https://www.youtube.com/embed/5wsTIWssAKQ",
   },
   {
     title: "From Hard-Knock Life to Big Laughs",
