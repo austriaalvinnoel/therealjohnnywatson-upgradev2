@@ -6,19 +6,19 @@ const videos = [
     title: "Dynamic, Relatable, Very Funny",
     description:
       "Johnny’s charisma, crowd work, and dependable delivery make him a comedian who can perform almost anywhere and connect with groups large and small.",
-    embedUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID_1",
+    embedUrl: "https://www.youtube.com/embed/F940VuhGZUk",
   },
   {
     title: "A Nice Guy Who Can Perform Anywhere",
     description:
       "A strong clip for showing booking agents and event organizers the kind of energy Johnny brings to the room.",
-    embedUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID_2",
+    embedUrl: "https://www.youtube.com/embed/ZrIHaI7OFo",
   },
   {
     title: "From Hard-Knock Life to Big Laughs",
     description:
       "Comedy shaped by real life, sharp timing, and self-deprecating honesty that audiences remember.",
-    embedUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID_3",
+    embedUrl: "https://www.youtube.com/embed/f56PDtheuGw",
   },
 ];
 
