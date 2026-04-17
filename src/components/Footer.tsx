@@ -23,8 +23,14 @@ const Footer = () => {
               Johnny Watson
             </a>
             <p className="text-sm text-muted-foreground mt-2">
-              Bringing Laughter to Life
+              Available for comedy clubs, private events, corporate shows, and special appearances.
             </p>
+            <a
+              href="#booking"
+              className="inline-block mt-4 text-primary font-medium hover:underline"
+            >
+              Book Johnny →
+            </a>
           </motion.div>
 
           <motion.div
