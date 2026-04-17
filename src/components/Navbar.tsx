@@ -4,10 +4,10 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Shows", href: "#shows" },
   { name: "Videos", href: "#videos" },
-  { name: "Contact", href: "#contact" },
+  { name: "Shows", href: "#shows" },
+  { name: "About", href: "#about" },
+  { name: "Booking", href: "#booking" },
 ];
 
 const Navbar = () => {
@@ -16,8 +16,9 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -29,7 +30,7 @@ const Navbar = () => {
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
+          ? "bg-background/90 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
       }`}
     >
@@ -39,7 +40,6 @@ const Navbar = () => {
             JW
           </a>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
@@ -50,29 +50,28 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <a href="#contact" className="btn-gold text-sm rounded">
-              Book Now
+            <a href="#booking" className="btn-gold text-sm rounded">
+              Book Johnny
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-foreground"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/98 backdrop-blur-lg border-b border-border"
+            className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border"
           >
             <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -85,8 +84,12 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <a href="#contact" className="btn-gold text-center rounded mt-4">
-                Book Now
+              <a
+                href="#booking"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="btn-gold text-center rounded mt-4"
+              >
+                Book Johnny
               </a>
             </div>
           </motion.div>
