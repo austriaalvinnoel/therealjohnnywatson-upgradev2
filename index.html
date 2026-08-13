@@ -3,18 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Real Johnny Watson</title>
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <meta name="description" content="The Real Johnny Watson - Comedian, Entertainer, Legend" />
+    <title>Johnny Watson | Stand-Up Comedian & Entertainer in New Jersey</title>
+    <meta name="description" content="Official website of Johnny Watson, a New Jersey stand-up comedian, actor, and entertainer available for comedy clubs, corporate events, private parties, fundraisers, and special appearances." />
     <meta name="author" content="Johnny Watson" />
-    <meta property="og:title" content="The Real Johnny Watson" />
-    <meta property="og:description" content="The Real Johnny Watson - Comedian, Entertainer, Legend" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://therealjohnnywatson.com/" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <meta property="og:title" content="Johnny Watson | Stand-Up Comedian & Entertainer" />
+    <meta property="og:description" content="Watch Johnny Watson perform and inquire about bookings for comedy clubs, corporate events, private parties, fundraisers, and special appearances." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://therealjohnnywatson.com/images/johnny-watson.jpg" />
+    <meta property="og:url" content="https://therealjohnnywatson.com/" />
+    <meta property="og:site_name" content="The Real Johnny Watson" />
+    <meta property="og:image" content="https://therealjohnnywatson.com/johnny-watson.jpg" />
+    <meta property="og:image:alt" content="Comedian Johnny Watson" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@comedianwatson" />
-    <meta name="twitter:image" content="https://therealjohnnywatson.com/images/johnny-watson.jpg" />
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <meta name="twitter:title" content="Johnny Watson | Stand-Up Comedian & Entertainer" />
+    <meta name="twitter:description" content="Watch Johnny Watson perform and inquire about bookings for comedy clubs, corporate events, private parties, fundraisers, and special appearances." />
+    <meta name="twitter:image" content="https://therealjohnnywatson.com/johnny-watson.jpg" />
+    <meta name="twitter:image:alt" content="Comedian Johnny Watson" />
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -23,23 +33,27 @@
           "@type": "Person",
           "@id": "https://therealjohnnywatson.com/#johnny",
           "name": "Johnny Watson",
-          "url": "https://therealjohnnywatson.com",
-          "image": "https://therealjohnnywatson.com/images/johnny-watson.jpg",
-          "description": "Johnny Watson is a comedian, actor, and entertainer bringing laughter to audiences across the nation.",
-          "jobTitle": "Comedian",
-          "knowsAbout": ["Stand-up Comedy", "Acting", "Entertainment"],
+          "url": "https://therealjohnnywatson.com/",
+          "image": "https://therealjohnnywatson.com/johnny-watson.jpg",
+          "description": "Johnny Watson is a New Jersey stand-up comedian, actor, and entertainer available for live comedy and event bookings.",
+          "jobTitle": "Stand-Up Comedian",
+          "homeLocation": {
+            "@type": "Place",
+            "name": "Bloomingdale, New Jersey"
+          },
+          "knowsAbout": ["Stand-up Comedy", "Acting", "Live Entertainment"],
           "sameAs": [
-            "https://www.instagram.com/johnnywatsoncomedy",
-            "https://www.facebook.com/goodcomic",
+            "https://www.instagram.com/therealjohnnywatson",
+            "https://www.facebook.com/therealjohnnywatson",
             "https://x.com/comedianwatson"
           ]
         },
         {
           "@type": "WebSite",
           "@id": "https://therealjohnnywatson.com/#website",
-          "url": "https://therealjohnnywatson.com",
+          "url": "https://therealjohnnywatson.com/",
           "name": "The Real Johnny Watson",
-          "description": "Official website of comedian Johnny Watson",
+          "description": "Official website of stand-up comedian and entertainer Johnny Watson.",
           "publisher": {
             "@id": "https://therealjohnnywatson.com/#johnny"
           }
@@ -50,23 +64,6 @@
   </head>
   <body>
     <div id="root"></div>
-    <form name="contact" method="POST" data-netlify="true" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="text" name="subject" />
-      <textarea name="message"></textarea>
-    </form>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
   </body>
 </html>

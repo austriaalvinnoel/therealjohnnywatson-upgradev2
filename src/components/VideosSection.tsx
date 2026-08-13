@@ -48,7 +48,7 @@ const VideosSection = () => {
 
         <div className="grid lg:grid-cols-3 gap-8">
           {videos.map((video, index) => (
-            <motion.div
+            <motion.article
               key={video.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +60,8 @@ const VideosSection = () => {
                 <iframe
                   className="w-full h-full"
                   src={video.embedUrl}
-                  title={video.title}
+                  title={`${video.title} - Johnny Watson comedy clip`}
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
@@ -76,13 +77,9 @@ const VideosSection = () => {
                 </p>
 
                 <div className="flex items-center justify-between gap-4">
-                  <a
-                    href="#booking"
-                    className="text-primary font-medium hover:underline"
-                  >
+                  <a href="#booking" className="text-primary font-medium hover:underline">
                     Book Johnny →
                   </a>
-
                   <a
                     href="#booking"
                     className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -92,7 +89,7 @@ const VideosSection = () => {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

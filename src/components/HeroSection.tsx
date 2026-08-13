@@ -11,7 +11,7 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="Johnny Watson performing on stage"
+          alt="Johnny Watson performing stand-up comedy on stage"
           className="w-full h-full object-cover object-center scale-105"
         />
         <div className="absolute inset-0 bg-black/70" />
@@ -31,7 +31,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-primary font-medium tracking-[0.3em] uppercase mb-4"
           >
-            Comedian • Actor • Entertainer
+            Stand-Up Comedian • Actor • Entertainer
           </motion.p>
 
           <motion.h1
@@ -51,9 +51,9 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed"
           >
-            Dynamic, relatable, professional, and very, very funny. Live shows,
-            real stories, and unforgettable laughs for comedy clubs, private
-            parties, and corporate audiences.
+            Dynamic, relatable stand-up comedy, real stories, and unforgettable
+            laughs for comedy clubs, private parties, corporate events, and
+            special appearances.
           </motion.p>
 
           <motion.div
