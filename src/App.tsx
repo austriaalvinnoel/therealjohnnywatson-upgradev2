@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NewJerseyComedianPage from "./pages/NewJerseyComedianPage";
 import CorporateComedianPage from "./pages/CorporateComedianPage";
+import PartyComedianPage from "./pages/PartyComedianPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
