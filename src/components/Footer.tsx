@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Youtube, Instagram, Twitter, Facebook } from "lucide-react";
 
 const socialLinks = [
-  { icon: Youtube, href: "https://www.youtube.com/user/WatsonnWatson", label: "YouTube" },
-  { icon: Instagram, href: "https://www.instagram.com/johnnywatsoncomedy/", label: "Instagram" },
-  { icon: Twitter, href: "https://x.com/comedianwatson", label: "Twitter" },
-  { icon: Facebook, href: "https://www.facebook.com/johnnywatson11", label: "Facebook" },
+  { icon: Youtube, href: "https://www.youtube.com/user/WatsonnWatson", label: "Johnny Watson on YouTube" },
+  { icon: Instagram, href: "https://www.instagram.com/johnnywatsoncomedy/", label: "Johnny Watson on Instagram" },
+  { icon: Twitter, href: "https://x.com/comedianwatson", label: "Johnny Watson on X" },
+  { icon: Facebook, href: "https://www.facebook.com/johnnywatson11", label: "Johnny Watson on Facebook" },
 ];
 
 const Footer = () => {
@@ -23,14 +23,14 @@ const Footer = () => {
               Johnny Watson
             </a>
             <p className="text-sm text-muted-foreground mt-2">
-              Available for comedy clubs, private events, corporate shows, and special appearances.
+              New Jersey stand-up comedian available for comedy clubs, private events, corporate shows, and special appearances.
             </p>
-            <a
-              href="#booking"
-              className="inline-block mt-4 text-primary font-medium hover:underline"
-            >
-              Book Johnny →
-            </a>
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 mt-4 text-sm">
+              <a href="#videos" className="text-muted-foreground hover:text-primary transition-colors">Watch clips</a>
+              <a href="#shows" className="text-muted-foreground hover:text-primary transition-colors">Venues</a>
+              <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">About</a>
+              <a href="#booking" className="text-primary font-medium hover:underline">Book Johnny →</a>
+            </div>
           </motion.div>
 
           <motion.div
@@ -41,14 +41,16 @@ const Footer = () => {
             className="flex items-center gap-4"
           >
             {socialLinks.map((social) => (
-              <button
+              <a
                 key={social.label}
-                onClick={() => window.open(social.href, "_blank")}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 aria-label={social.label}
               >
-                <social.icon size={18} />
-              </button>
+                <social.icon size={18} aria-hidden="true" />
+              </a>
             ))}
           </motion.div>
 
