@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Calendar, CheckCircle2, MapPin } from "lucide-react";
+import { ArrowLeft, Calendar, CheckCircle2, MapPin, PlayCircle } from "lucide-react";
 import Footer from "@/components/Footer";
 
 export type ServicePageContent = {
@@ -12,6 +12,9 @@ export type ServicePageContent = {
   highlights: string[];
   bestFor: string[];
   localNote: string;
+  planningTitle: string;
+  planningCopy: string[];
+  faqs: { question: string; answer: string }[];
 };
 
 const ServicePage = ({ content }: { content: ServicePageContent }) => {
@@ -34,7 +37,38 @@ const ServicePage = ({ content }: { content: ServicePageContent }) => {
     setMeta('meta[name="twitter:description"]', "content", content.description);
     setMeta('link[rel="canonical"]', "href", canonicalUrl);
 
+    const schemaId = "service-page-schema";
+    document.getElementById(schemaId)?.remove();
+    const schema = document.createElement("script");
+    schema.id = schemaId;
+    schema.type = "application/ld+json";
+    schema.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "@id": `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: fullTitle,
+          description: content.description,
+          isPartOf: { "@id": "https://therealjohnnywatson.com/#website" },
+          about: { "@id": "https://therealjohnnywatson.com/#johnny" },
+        },
+        {
+          "@type": "FAQPage",
+          "@id": `${canonicalUrl}#faq`,
+          mainEntity: content.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          })),
+        },
+      ],
+    });
+    document.head.appendChild(schema);
+
     window.scrollTo(0, 0);
+    return () => document.getElementById(schemaId)?.remove();
   }, [content]);
 
   return (
@@ -62,7 +96,9 @@ const ServicePage = ({ content }: { content: ServicePageContent }) => {
                 <a href="/#booking" className="btn-gold rounded-sm inline-flex items-center justify-center gap-2">
                   <Calendar size={18} aria-hidden="true" /> Check Availability
                 </a>
-                <a href="/#videos" className="btn-outline-gold rounded-sm inline-flex items-center justify-center">Watch Johnny Perform</a>
+                <a href="/#videos" className="btn-outline-gold rounded-sm inline-flex items-center justify-center gap-2">
+                  <PlayCircle size={18} aria-hidden="true" /> Watch Johnny Perform
+                </a>
               </div>
             </div>
 
@@ -101,6 +137,39 @@ const ServicePage = ({ content }: { content: ServicePageContent }) => {
                 {content.bestFor.map((item) => <li key={item}>• {item}</li>)}
               </ul>
               <a href="/#booking" className="btn-gold rounded-sm inline-block mt-8">Send a Booking Inquiry</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 md:py-24 border-t border-border/60">
+          <div className="container mx-auto px-6 grid lg:grid-cols-[.8fr_1.2fr] gap-12">
+            <div>
+              <p className="text-primary uppercase tracking-[0.25em] font-medium mb-3">Planning your event</p>
+              <h2 className="font-display text-4xl font-bold">{content.planningTitle}</h2>
+            </div>
+            <div className="space-y-5">
+              {content.planningCopy.map((paragraph) => (
+                <p key={paragraph} className="text-lg text-muted-foreground leading-relaxed">{paragraph}</p>
+              ))}
+              <div className="flex flex-wrap gap-4 pt-2">
+                <a href="/#booking" className="btn-gold rounded-sm">Check Johnny's Availability</a>
+                <a href="/#videos" className="btn-outline-gold rounded-sm">Watch Comedy Clips</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 md:py-24 border-t border-border/60">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <p className="text-primary uppercase tracking-[0.25em] font-medium mb-3">Booking FAQ</p>
+            <h2 className="font-display text-4xl font-bold mb-10">Questions before you book</h2>
+            <div className="grid md:grid-cols-2 gap-5">
+              {content.faqs.map((faq) => (
+                <article key={faq.question} className="card-theatrical p-6">
+                  <h3 className="font-display text-2xl font-bold mb-3">{faq.question}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
