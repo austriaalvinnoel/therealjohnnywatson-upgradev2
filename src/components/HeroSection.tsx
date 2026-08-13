@@ -6,7 +6,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-[760px] md:min-h-[820px] lg:min-h-[860px] flex items-center overflow-hidden"
     >
       <div className="absolute inset-0">
         <img
@@ -23,7 +23,7 @@ const HeroSection = () => {
         <div className="absolute top-0 left-1/3 w-[800px] h-[600px] bg-primary/10 blur-[150px] rounded-full" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 pt-24">
+      <div className="container mx-auto px-6 relative z-10 pt-20 pb-12">
         <div className="max-w-2xl">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="mt-16 border-l-2 border-primary/50 pl-6"
+            className="mt-12 border-l-2 border-primary/50 pl-6"
           >
             <p className="text-muted-foreground italic text-lg">
               "Johnny Watson always makes me laugh."
