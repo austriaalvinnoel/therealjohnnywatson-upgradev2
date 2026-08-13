@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NewJerseyComedianPage from "./pages/NewJerseyComedianPage";
 import CorporateComedianPage from "./pages/CorporateComedianPage";
+import PartyComedianPage from "./pages/PartyComedianPage";
+import FundraiserComedianPage from "./pages/FundraiserComedianPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +22,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/new-jersey-comedian" element={<NewJerseyComedianPage />} />
           <Route path="/corporate-comedian" element={<CorporateComedianPage />} />
+          <Route path="/party-comedian" element={<PartyComedianPage />} />
+          <Route path="/fundraiser-comedian" element={<FundraiserComedianPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
