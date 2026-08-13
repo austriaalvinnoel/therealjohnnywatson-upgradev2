@@ -6,21 +6,29 @@ const bookingOptions = [
     icon: Building2,
     title: "Corporate Events",
     description: "Bring professional stand-up comedy to company events, celebrations, and team gatherings.",
+    href: "/corporate-comedian",
+    linkLabel: "Explore corporate comedy",
   },
   {
     icon: PartyPopper,
     title: "Private Parties",
     description: "Add a memorable live comedy experience to birthdays, celebrations, and private events.",
+    href: "#booking",
+    linkLabel: "Check availability",
   },
   {
     icon: Mic2,
     title: "Comedy Clubs",
     description: "Book Johnny for club dates, showcases, guest spots, and live comedy programming.",
+    href: "/new-jersey-comedian",
+    linkLabel: "New Jersey bookings",
   },
   {
     icon: HeartHandshake,
     title: "Fundraisers & Galas",
     description: "Give guests an entertaining live performance for fundraising events and special occasions.",
+    href: "#booking",
+    linkLabel: "Check availability",
   },
 ];
 
@@ -52,11 +60,14 @@ const BookingOptionsSection = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
-              className="card-theatrical p-6"
+              className="card-theatrical p-6 flex flex-col"
             >
               <Icon className="w-7 h-7 text-primary mb-5" aria-hidden="true" />
               <h3 className="font-display text-2xl font-bold mb-3">{option.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{option.description}</p>
+              <p className="text-muted-foreground leading-relaxed flex-1">{option.description}</p>
+              <a href={option.href} className="text-primary font-medium mt-5 hover:underline">
+                {option.linkLabel} →
+              </a>
             </motion.article>
           );
         })}
