@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { Star, Mic, Users, Calendar } from "lucide-react";
 import aboutData from "../content/about.json";
 
@@ -15,7 +15,7 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="about" className="py-20 md:py-24 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[150px] rounded-full" />
       <div className="container mx-auto px-6">
         <div ref={ref} className="grid lg:grid-cols-2 gap-16 items-center">
@@ -35,7 +35,7 @@ const AboutSection = () => {
               ))}
             </div>
             <motion.a
-              href="#contact"
+              href="#booking"
               className="btn-gold rounded-sm inline-block mt-8"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
