@@ -19,17 +19,16 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-center md:text-left"
           >
-            <a href="#home" className="text-3xl font-display font-bold text-primary">
-              Johnny Watson
-            </a>
+            <a href="/" className="text-3xl font-display font-bold text-primary">Johnny Watson</a>
             <p className="text-sm text-muted-foreground mt-2">
               New Jersey stand-up comedian available for comedy clubs, private events, corporate shows, and special appearances.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 mt-4 text-sm">
-              <a href="#videos" className="text-muted-foreground hover:text-primary transition-colors">Watch clips</a>
-              <a href="#shows" className="text-muted-foreground hover:text-primary transition-colors">Venues</a>
-              <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">About</a>
-              <a href="#booking" className="text-primary font-medium hover:underline">Book Johnny →</a>
+              <a href="/new-jersey-comedian" className="text-muted-foreground hover:text-primary transition-colors">New Jersey comedian</a>
+              <a href="/corporate-comedian" className="text-muted-foreground hover:text-primary transition-colors">Corporate events</a>
+              <a href="/#videos" className="text-muted-foreground hover:text-primary transition-colors">Watch clips</a>
+              <a href="/#shows" className="text-muted-foreground hover:text-primary transition-colors">Venues</a>
+              <a href="/#booking" className="text-primary font-medium hover:underline">Book Johnny →</a>
             </div>
           </motion.div>
 
