@@ -16,11 +16,24 @@ export type ServicePageContent = {
 
 const ServicePage = ({ content }: { content: ServicePageContent }) => {
   useEffect(() => {
-    document.title = `${content.title} | Johnny Watson`;
-    const description = document.querySelector('meta[name="description"]');
-    if (description) description.setAttribute("content", content.description);
-    const canonical = document.querySelector('link[rel="canonical"]');
-    if (canonical) canonical.setAttribute("href", `https://therealjohnnywatson.com${content.path}`);
+    const fullTitle = `${content.title} | Johnny Watson`;
+    const canonicalUrl = `https://therealjohnnywatson.com${content.path}`;
+
+    document.title = fullTitle;
+
+    const setMeta = (selector: string, attribute: string, value: string) => {
+      const element = document.querySelector(selector);
+      if (element) element.setAttribute(attribute, value);
+    };
+
+    setMeta('meta[name="description"]', "content", content.description);
+    setMeta('meta[property="og:title"]', "content", fullTitle);
+    setMeta('meta[property="og:description"]', "content", content.description);
+    setMeta('meta[property="og:url"]', "content", canonicalUrl);
+    setMeta('meta[name="twitter:title"]', "content", fullTitle);
+    setMeta('meta[name="twitter:description"]', "content", content.description);
+    setMeta('link[rel="canonical"]', "href", canonicalUrl);
+
     window.scrollTo(0, 0);
   }, [content]);
 
@@ -98,7 +111,7 @@ const ServicePage = ({ content }: { content: ServicePageContent }) => {
             <nav className="flex flex-wrap gap-x-6 gap-y-3" aria-label="Related booking pages">
               <Link className="text-muted-foreground hover:text-primary" to="/new-jersey-comedian">New Jersey Comedian</Link>
               <Link className="text-muted-foreground hover:text-primary" to="/corporate-comedian">Corporate Events</Link>
-              <Link className="text-muted-foreground hover:text-primary" to="/private-event-comedian">Private Events</Link>
+              <Link className="text-muted-foreground hover:text-primary" to="/party-comedian">Party Events</Link>
               <Link className="text-muted-foreground hover:text-primary" to="/fundraiser-comedian">Fundraisers & Galas</Link>
             </nav>
           </div>
