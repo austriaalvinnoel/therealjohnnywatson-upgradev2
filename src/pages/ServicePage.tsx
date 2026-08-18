@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Calendar, CheckCircle2, MapPin, PlayCircle } from "lucide-react";
+import { ArrowLeft, Calendar, CheckCircle2, FileText, MapPin, PlayCircle } from "lucide-react";
 import Footer from "@/components/Footer";
+
+const PRESS_KIT_URL = "https://www.powerpresskits.com/get/johnnywatson";
 
 export type ServicePageContent = {
   path: string;
@@ -80,6 +82,14 @@ const ServicePage = ({ content }: { content: ServicePageContent }) => {
             <Link to="/" className="hidden sm:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
               <ArrowLeft size={16} aria-hidden="true" /> Home
             </Link>
+            <a
+              href={PRESS_KIT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <FileText size={16} aria-hidden="true" /> Press Kit
+            </a>
             <a href="/#booking" className="btn-gold rounded-sm text-sm">Book Johnny</a>
           </div>
         </div>
@@ -100,6 +110,14 @@ const ServicePage = ({ content }: { content: ServicePageContent }) => {
                   <PlayCircle size={18} aria-hidden="true" /> Watch Johnny Perform
                 </a>
               </div>
+              <a
+                href={PRESS_KIT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-5 text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                <FileText size={16} aria-hidden="true" /> Promoters & media: view Johnny’s official press kit
+              </a>
             </div>
 
             <aside className="card-theatrical p-7 md:p-8">
@@ -154,6 +172,14 @@ const ServicePage = ({ content }: { content: ServicePageContent }) => {
               <div className="flex flex-wrap gap-4 pt-2">
                 <a href="/#booking" className="btn-gold rounded-sm">Check Johnny's Availability</a>
                 <a href="/#videos" className="btn-outline-gold rounded-sm">Watch Comedy Clips</a>
+                <a
+                  href={PRESS_KIT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline-gold rounded-sm inline-flex items-center gap-2"
+                >
+                  <FileText size={17} aria-hidden="true" /> View Press Kit
+                </a>
               </div>
             </div>
           </div>
@@ -182,6 +208,7 @@ const ServicePage = ({ content }: { content: ServicePageContent }) => {
               <Link className="text-muted-foreground hover:text-primary" to="/corporate-comedian">Corporate Events</Link>
               <Link className="text-muted-foreground hover:text-primary" to="/party-comedian">Party Events</Link>
               <Link className="text-muted-foreground hover:text-primary" to="/fundraiser-comedian">Fundraisers & Galas</Link>
+              <a className="text-muted-foreground hover:text-primary" href={PRESS_KIT_URL} target="_blank" rel="noopener noreferrer">Official Press Kit</a>
             </nav>
           </div>
         </section>
