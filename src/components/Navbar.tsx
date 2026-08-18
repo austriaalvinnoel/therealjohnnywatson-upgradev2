@@ -6,6 +6,7 @@ const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Videos", href: "#videos" },
   { name: "Venues", href: "#shows" },
+  { name: "Press Kit", href: "#press-kit" },
   { name: "About", href: "#about" },
   { name: "Booking", href: "#booking" },
 ];
