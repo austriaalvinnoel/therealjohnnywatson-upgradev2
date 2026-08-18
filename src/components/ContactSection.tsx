@@ -19,6 +19,9 @@ const ContactSection = () => {
     name: "",
     email: "",
     eventType: "",
+    eventDate: "",
+    eventLocation: "",
+    audienceSize: "",
     message: "",
   });
 
@@ -26,10 +29,32 @@ const ContactSection = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(false);
 
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      eventType: "",
+      eventDate: "",
+      eventLocation: "",
+      audienceSize: "",
+      message: "",
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     setError(false);
+
+    const bookingDetails = [
+      `Event type: ${formData.eventType}`,
+      `Event date: ${formData.eventDate}`,
+      `Location: ${formData.eventLocation}`,
+      `Estimated audience size: ${formData.audienceSize || "Not provided"}`,
+      "",
+      "Additional details:",
+      formData.message || "None provided",
+    ].join("\n");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -41,8 +66,8 @@ const ContactSection = () => {
           access_key: WEB3FORMS_KEY,
           name: formData.name,
           email: formData.email,
-          subject: `Booking Inquiry: ${formData.eventType}`,
-          message: formData.message,
+          subject: `Booking Inquiry: ${formData.eventType} — ${formData.eventDate}`,
+          message: bookingDetails,
           cc: "thewatsonshows@gmail.com",
         }),
       });
@@ -51,12 +76,7 @@ const ContactSection = () => {
 
       if (data.success) {
         setSubmitted(true);
-        setFormData({
-          name: "",
-          email: "",
-          eventType: "",
-          message: "",
-        });
+        resetForm();
       } else {
         setError(true);
       }
@@ -68,7 +88,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="booking" className="py-24 md:py-32 relative">
+    <section id="booking" className="py-24 md:py-32 relative" aria-labelledby="booking-heading">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -81,14 +101,14 @@ const ContactSection = () => {
             Booking
           </p>
 
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+          <h2 id="booking-heading" className="font-display text-4xl md:text-5xl font-bold mb-6">
             Book <span className="text-gradient-gold">Johnny</span> Watson
           </h2>
 
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Available for comedy clubs, private parties, corporate events, and
-            special appearances. Send an inquiry below and let’s talk dates,
-            audience, and availability.
+            special appearances. Share the event basics below so Johnny’s team
+            can quickly review the date, location, audience, and availability.
           </p>
         </motion.div>
 
@@ -176,11 +196,12 @@ const ContactSection = () => {
                 onSubmit={handleSubmit}
                 className="card-theatrical p-8 space-y-5"
               >
-                <input type="checkbox" name="botcheck" className="hidden" />
-
                 <div className="grid sm:grid-cols-2 gap-5">
+                  <label className="sr-only" htmlFor="booking-name">Your Name</label>
                   <input
+                    id="booking-name"
                     type="text"
+                    autoComplete="name"
                     placeholder="Your Name"
                     required
                     value={formData.name}
@@ -190,8 +211,11 @@ const ContactSection = () => {
                     className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:border-primary focus:outline-none text-sm"
                   />
 
+                  <label className="sr-only" htmlFor="booking-email">Email Address</label>
                   <input
+                    id="booking-email"
                     type="email"
+                    autoComplete="email"
                     placeholder="Email Address"
                     required
                     value={formData.email}
@@ -202,7 +226,9 @@ const ContactSection = () => {
                   />
                 </div>
 
+                <label className="sr-only" htmlFor="booking-event-type">Type of Event</label>
                 <select
+                  id="booking-event-type"
                   required
                   value={formData.eventType}
                   onChange={(e) =>
@@ -219,10 +245,60 @@ const ContactSection = () => {
                   <option value="Other">Other</option>
                 </select>
 
-                <textarea
-                  placeholder="Date, location, audience size, and any special requests"
-                  rows={5}
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="booking-date" className="block text-xs text-muted-foreground mb-2">
+                      Event Date
+                    </label>
+                    <input
+                      id="booking-date"
+                      type="date"
+                      required
+                      value={formData.eventDate}
+                      onChange={(e) =>
+                        setFormData({ ...formData, eventDate: e.target.value })
+                      }
+                      className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:border-primary focus:outline-none text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="booking-audience" className="block text-xs text-muted-foreground mb-2">
+                      Estimated Audience Size
+                    </label>
+                    <input
+                      id="booking-audience"
+                      type="text"
+                      inputMode="numeric"
+                      placeholder="e.g. 150"
+                      value={formData.audienceSize}
+                      onChange={(e) =>
+                        setFormData({ ...formData, audienceSize: e.target.value })
+                      }
+                      className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:border-primary focus:outline-none text-sm"
+                    />
+                  </div>
+                </div>
+
+                <label className="sr-only" htmlFor="booking-location">Event Location</label>
+                <input
+                  id="booking-location"
+                  type="text"
+                  autoComplete="street-address"
+                  placeholder="Event Location (city, state or venue)"
                   required
+                  value={formData.eventLocation}
+                  onChange={(e) =>
+                    setFormData({ ...formData, eventLocation: e.target.value })
+                  }
+                  className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:border-primary focus:outline-none text-sm"
+                />
+
+                <label className="sr-only" htmlFor="booking-details">Additional Event Details</label>
+                <textarea
+                  id="booking-details"
+                  placeholder="Tell us anything else that would help: event schedule, audience, venue, performance length, or special requests."
+                  rows={5}
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
@@ -230,9 +306,13 @@ const ContactSection = () => {
                   className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:border-primary focus:outline-none resize-none text-sm"
                 />
 
+                <p className="text-xs text-muted-foreground text-center">
+                  No commitment required. This form is an availability and booking inquiry.
+                </p>
+
                 {error && (
                   <p className="text-red-400 text-sm text-center">
-                    Something went wrong. Please try again.
+                    Something went wrong. Please try again or contact Johnny directly by email.
                   </p>
                 )}
 
@@ -241,7 +321,7 @@ const ContactSection = () => {
                   disabled={submitting}
                   className="btn-gold rounded-sm w-full"
                 >
-                  {submitting ? "Sending..." : "Submit Booking Inquiry"}
+                  {submitting ? "Sending..." : "Check Johnny’s Availability"}
                 </button>
               </form>
             )}
