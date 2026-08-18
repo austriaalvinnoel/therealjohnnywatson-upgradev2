@@ -21,13 +21,15 @@ const Footer = () => {
           >
             <a href="/" className="text-3xl font-display font-bold text-primary">Johnny Watson</a>
             <p className="text-sm text-muted-foreground mt-2">
-              New Jersey stand-up comedian available for comedy clubs, private events, corporate shows, and special appearances.
+              New Jersey stand-up comedian available for comedy clubs, private events, corporate shows, fundraisers, and special appearances.
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 mt-4 text-sm">
               <a href="/new-jersey-comedian" className="text-muted-foreground hover:text-primary transition-colors">New Jersey comedian</a>
               <a href="/corporate-comedian" className="text-muted-foreground hover:text-primary transition-colors">Corporate events</a>
+              <a href="/party-comedian" className="text-muted-foreground hover:text-primary transition-colors">Private parties</a>
+              <a href="/fundraiser-comedian" className="text-muted-foreground hover:text-primary transition-colors">Fundraisers</a>
               <a href="/#videos" className="text-muted-foreground hover:text-primary transition-colors">Watch clips</a>
-              <a href="/#shows" className="text-muted-foreground hover:text-primary transition-colors">Venues</a>
+              <a href="/#press-kit" className="text-muted-foreground hover:text-primary transition-colors">Press kit</a>
               <a href="/#booking" className="text-primary font-medium hover:underline">Book Johnny →</a>
             </div>
           </motion.div>
