@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Calendar } from "lucide-react";
+import { Calendar, ExternalLink, Play } from "lucide-react";
 import heroImage from "@/assets/hero-comedian.jpg";
 
 const HeroSection = () => {
@@ -63,27 +63,38 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4"
           >
             <a
-              href="#videos"
+              href="#booking"
               className="btn-gold rounded-sm flex items-center justify-center gap-2"
             >
-              <Play size={18} />
-              Watch Clips
+              <Calendar size={18} aria-hidden="true" />
+              Check Availability
             </a>
 
             <a
-              href="#booking"
+              href="#videos"
               className="btn-outline-gold rounded-sm flex items-center justify-center gap-2"
             >
-              <Calendar size={18} />
-              Book Johnny
+              <Play size={18} aria-hidden="true" />
+              Watch Johnny Perform
             </a>
           </motion.div>
+
+          <motion.a
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            href="#press-kit"
+            className="inline-flex items-center gap-2 mt-5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
+            Promoters & media: view Johnny&apos;s press kit
+            <ExternalLink size={14} aria-hidden="true" />
+          </motion.a>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="mt-12 border-l-2 border-primary/50 pl-6"
+            className="mt-10 border-l-2 border-primary/50 pl-6"
           >
             <p className="text-muted-foreground italic text-lg">
               "Johnny Watson always makes me laugh."
