@@ -30,9 +30,9 @@ const ShowsSection = () => {
       <div className="container mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="text-center mb-12">
           <p className="text-primary font-medium tracking-[0.3em] uppercase mb-4">Upcoming Shows</p>
-          <h2 id="shows-heading" className="font-display text-4xl md:text-5xl font-bold mb-6">See Johnny live</h2>
+          <h2 id="shows-heading" className="font-display text-4xl md:text-5xl font-bold mb-6">Catch Johnny Live</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Upcoming appearances currently on Johnny’s schedule. Ticket links and additional details will be added as they become available.
+            See where Johnny Watson is performing next. Explore upcoming comedy shows and special appearances, and come experience the laughs live.
           </p>
         </motion.div>
 
@@ -48,17 +48,17 @@ const ShowsSection = () => {
         </div>
 
         <div className="text-center mt-8 text-sm text-muted-foreground">
-          Looking for tickets or show details? Check back for updates or contact Johnny’s team below.
+          Planning to see Johnny live? Show and ticket information will appear here as details are confirmed.
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mt-10">
-          <a href="#booking" className="btn-gold rounded-sm">Book Johnny for Your Event</a>
+          <a href="#booking" className="btn-gold rounded-sm">Bring Johnny to Your Event</a>
         </motion.div>
 
         <div className="mt-24 border-t border-border/50 pt-16">
           <div className="text-center mb-10">
             <p className="text-primary font-medium tracking-[0.3em] uppercase mb-3">Featured Venues</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold">Performance credits</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold">Where Johnny Has Taken the Stage</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {venues.map((item) => (
