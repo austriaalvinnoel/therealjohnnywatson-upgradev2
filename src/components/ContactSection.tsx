@@ -24,6 +24,7 @@ const ContactSection = () => {
     audienceSize: "",
     message: "",
   });
+  const [website, setWebsite] = useState("");
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -39,12 +40,21 @@ const ContactSection = () => {
       audienceSize: "",
       message: "",
     });
+    setWebsite("");
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitting(true);
     setError(false);
+
+    // Invisible honeypot: legitimate visitors never fill this field.
+    if (website) {
+      setSubmitted(true);
+      resetForm();
+      return;
+    }
+
+    setSubmitting(true);
 
     const bookingDetails = [
       `Event type: ${formData.eventType}`,
@@ -69,12 +79,13 @@ const ContactSection = () => {
           subject: `Booking Inquiry: ${formData.eventType} — ${formData.eventDate}`,
           message: bookingDetails,
           cc: "thewatsonshows@gmail.com",
+          botcheck: false,
         }),
       });
 
       const data = await response.json();
 
-      if (data.success) {
+      if (response.ok && data.success) {
         setSubmitted(true);
         resetForm();
       } else {
@@ -196,6 +207,18 @@ const ContactSection = () => {
                 onSubmit={handleSubmit}
                 className="card-theatrical p-8 space-y-5"
               >
+                <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                  <label htmlFor="booking-website">Website</label>
+                  <input
+                    id="booking-website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                  />
+                </div>
+
                 <div className="grid sm:grid-cols-2 gap-5">
                   <label className="sr-only" htmlFor="booking-name">Your Name</label>
                   <input
@@ -204,6 +227,8 @@ const ContactSection = () => {
                     autoComplete="name"
                     placeholder="Your Name"
                     required
+                    minLength={2}
+                    maxLength={100}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -218,6 +243,7 @@ const ContactSection = () => {
                     autoComplete="email"
                     placeholder="Email Address"
                     required
+                    maxLength={254}
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -270,6 +296,8 @@ const ContactSection = () => {
                       id="booking-audience"
                       type="text"
                       inputMode="numeric"
+                      pattern="[0-9, ]{1,20}"
+                      maxLength={20}
                       placeholder="e.g. 150"
                       value={formData.audienceSize}
                       onChange={(e) =>
@@ -287,6 +315,8 @@ const ContactSection = () => {
                   autoComplete="street-address"
                   placeholder="Event Location (city, state or venue)"
                   required
+                  minLength={2}
+                  maxLength={160}
                   value={formData.eventLocation}
                   onChange={(e) =>
                     setFormData({ ...formData, eventLocation: e.target.value })
@@ -299,6 +329,7 @@ const ContactSection = () => {
                   id="booking-details"
                   placeholder="Tell us anything else that would help: event schedule, audience, venue, performance length, or special requests."
                   rows={5}
+                  maxLength={2000}
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
