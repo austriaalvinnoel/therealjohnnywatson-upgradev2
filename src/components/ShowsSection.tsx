@@ -5,6 +5,7 @@ import { CalendarDays, ChevronDown, MapPin, Mic2, Star } from "lucide-react";
 const upcomingShows = [
   { date: "Aug 21–22, 2026", venue: "Give A Hoot Comedy Club", location: "Gaithersburg, MD", type: "Public Show" },
   { date: "Aug 28–29, 2026", venue: "McGuire's Comedy Club", location: "Bohemia, NY", type: "Public Show" },
+  { date: "Sep 12, 2026 · 8:00 PM", venue: "Hot Pudge Comedy Takeover · American Legion Post 223", location: "Killeen, TX", type: "Public Show", featured: true },
   { date: "Sep 19, 2026", venue: "Open Door Arts", location: "Bridgewater, NJ", type: "Public Show" },
   { date: "Sep 29–Oct 3, 2026", venue: "Dry Bar Comedy Special", location: "Provo, UT", type: "Comedy Special", featured: true },
   { date: "Oct 9–10, 2026", venue: "Dickens Parlour Theatre", location: "Ocean View, DE", type: "Public Show" },
@@ -15,7 +16,9 @@ const upcomingShows = [
   { date: "Nov 20–21, 2026", venue: "Krackpots Comedy Club", location: "Massillon, OH", type: "Public Show" },
   { date: "Dec 18–19, 2026", venue: "Loony's Comedy Club", location: "Edgewater, MD", type: "Public Show" },
   { date: "Dec 31, 2026", venue: "NYE at Uncle Vinnie's", location: "Point Pleasant Beach, NJ", type: "Public Show" },
+  { date: "Jan 21, 2027", venue: "Inn of the Mountain Gods Resort & Casino", location: "Mescalero, NM", type: "Public Show" },
   { date: "Jan 22–23, 2027", venue: "JP's Comedy Club", location: "Phoenix, AZ", type: "Public Show" },
+  { date: "Jan 25, 2027", venue: "Hon-Dah Resort Casino", location: "Pinetop, AZ", type: "Public Show" },
   { date: "Apr 17, 2027", venue: "Mountainside Elks Club", location: "Mountainside, NJ", type: "Public Show" },
 ];
 
