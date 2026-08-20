@@ -56,6 +56,7 @@ if (!fs.existsSync(templatePath)) {
 }
 
 const template = fs.readFileSync(templatePath, "utf8");
+const serviceTemplate = template.replace(/\s*<script id="homepage-events-schema"[\s\S]*?<\/script>/, "");
 const escapeAttr = (value) => value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 for (const page of pages) {
@@ -84,7 +85,7 @@ for (const page of pages) {
     ],
   };
 
-  let html = template
+  let html = serviceTemplate
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeAttr(page.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${escapeAttr(page.description)}" />`)
     .replace(/<link rel="canonical" href="[^"]*"\s*\/>/, `<link rel="canonical" href="${canonical}" />`)
