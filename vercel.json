@@ -31,6 +31,12 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/new-jersey-comedian/", "destination": "/new-jersey-comedian", "permanent": true },
+    { "source": "/corporate-comedian/", "destination": "/corporate-comedian", "permanent": true },
+    { "source": "/party-comedian/", "destination": "/party-comedian", "permanent": true },
+    { "source": "/fundraiser-comedian/", "destination": "/fundraiser-comedian", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/((?!admin).*)", "destination": "/index.html" }
   ]
