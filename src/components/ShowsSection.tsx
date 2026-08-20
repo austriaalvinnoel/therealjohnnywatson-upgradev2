@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CalendarDays, ChevronDown, MapPin, Mic2, Star } from "lucide-react";
+import { CalendarDays, ChevronDown, ExternalLink, MapPin, Mic2, Star } from "lucide-react";
 
 const upcomingShows = [
   { date: "Aug 21–22, 2026", venue: "Give A Hoot Comedy Club", location: "Gaithersburg, MD", type: "Public Show" },
-  { date: "Aug 28–29, 2026", venue: "McGuire's Comedy Club", location: "Bohemia, NY", type: "Public Show" },
+  { date: "Aug 28–29, 2026", venue: "McGuire's Comedy Club", location: "Bohemia, NY", type: "Public Show", detailsUrl: "https://bohemia.govs.com/events/141385", detailsLabel: "Tickets & Details" },
   { date: "Sep 12, 2026 · 8:00 PM", venue: "Hot Pudge Comedy Takeover · American Legion Post 223", location: "Killeen, TX", type: "Public Show", featured: true },
   { date: "Sep 19, 2026", venue: "Open Door Arts", location: "Bridgewater, NJ", type: "Public Show" },
   { date: "Sep 29–Oct 3, 2026", venue: "Dry Bar Comedy Special", location: "Provo, UT", type: "Comedy Special", featured: true },
@@ -12,7 +12,7 @@ const upcomingShows = [
   { date: "Oct 17, 2026", venue: "Little Ferry Community Center", location: "Little Ferry, NJ", type: "Public Show" },
   { date: "Oct 19, 2026", venue: "Sparta Community Theatre", location: "Sparta, NJ", type: "Public Show" },
   { date: "Oct 29, 2026", venue: "Private Event", location: "Spring City, PA", type: "Private Event" },
-  { date: "Nov 11–12, 2026", venue: "Uncle Vinnie's", location: "Point Pleasant Beach, NJ", type: "Public Show" },
+  { date: "Nov 11–12, 2026", venue: "Uncle Vinnie's", location: "Point Pleasant Beach, NJ", type: "Public Show", detailsUrl: "https://www.unclevinniescomedyclub.com/comedy-schedule/1000/?date=2026-11", detailsLabel: "Official Details" },
   { date: "Nov 20–21, 2026", venue: "Krackpots Comedy Club", location: "Massillon, OH", type: "Public Show" },
   { date: "Dec 18–19, 2026", venue: "Loony's Comedy Club", location: "Edgewater, MD", type: "Public Show" },
   { date: "Dec 31, 2026", venue: "NYE at Uncle Vinnie's", location: "Point Pleasant Beach, NJ", type: "Public Show" },
@@ -59,6 +59,10 @@ const ShowsSection = () => {
                 <div className="md:text-right">
                   {show.type === "Private Event" ? (
                     <span className="text-xs uppercase tracking-[0.14em] text-muted-foreground">Private</span>
+                  ) : show.detailsUrl ? (
+                    <a href={show.detailsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-primary hover:underline">
+                      {show.detailsLabel} <ExternalLink size={13} aria-hidden="true" />
+                    </a>
                   ) : (
                     <span className="text-xs uppercase tracking-[0.14em] text-muted-foreground">Details coming soon</span>
                   )}
