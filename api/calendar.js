@@ -1,13 +1,8 @@
 const CALENDAR_URL = "https://calendar.google.com/calendar/ical/thewatsonshow%40gmail.com/public/basic.ics";
-
 function unfold(text) { return text.replace(/\r?\n[ \t]/g, ""); }
 function valueOf(line) { const index = line.indexOf(":"); return index === -1 ? "" : line.slice(index + 1).trim(); }
-function cleanText(value) {
-  return value.replace(/<br\s*\/?>/gi, "\n").replace(/<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, "$2 ($1)").replace(/<[^>]*>/g, "").replace(/\\n/g, "\n").trim();
-}
-function extractUrl(value) {
-  return value.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1] || value.match(/https?:\/\/[^\s<>"')]+/i)?.[0] || "";
-}
+function cleanText(value) { return value.replace(/<br\s*\/?>/gi, "\n").replace(/<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, "$2 ($1)").replace(/<[^>]*>/g, "").replace(/\\n/g, "\n").trim(); }
+function extractUrl(value) { return value.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1] || value.match(/https?:\/\/[^\s<>"')]+/i)?.[0] || ""; }
 function parseDate(raw) {
   const value = raw.replace(/[^0-9TZ]/g, "");
   if (/^\d{8}$/.test(value)) return new Date(Date.UTC(Number(value.slice(0,4)), Number(value.slice(4,6))-1, Number(value.slice(6,8)))).toISOString();
@@ -19,10 +14,11 @@ function parseEvents(ics) {
   const now = Date.now();
   return unfold(ics).split("BEGIN:VEVENT").slice(1).map((block) => {
     const lines = block.split(/\r?\n/);
-    const get = (name) => { const line = lines.find((item) => item.startsWith(name)); return line ? valueOf(line) : ""; };
+    const getLine = (name) => lines.find((item) => item.startsWith(name)) || "";
+    const get = (name) => valueOf(getLine(name));
     const descriptionRaw = get("DESCRIPTION");
-    const startLine = lines.find((item) => item.startsWith("DTSTART"));
-    const endLine = lines.find((item) => item.startsWith("DTEND"));
+    const startLine = getLine("DTSTART");
+    const endLine = getLine("DTEND");
     return {
       id: get("UID") || crypto.randomUUID(),
       title: cleanText(get("SUMMARY")) || "Johnny Watson Show",
@@ -31,6 +27,7 @@ function parseEvents(ics) {
       url: get("URL") || extractUrl(descriptionRaw),
       start: startLine ? parseDate(valueOf(startLine)) : null,
       end: endLine ? parseDate(valueOf(endLine)) : null,
+      allDay: /VALUE=DATE/.test(startLine) || /^DTSTART:\d{8}/.test(startLine),
     };
   }).filter((event) => event.start && new Date(event.end || event.start).getTime() >= now)
     .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
