@@ -3,17 +3,10 @@ const CALENDAR_URL = "https://calendar.google.com/calendar/ical/thewatsonshow%40
 function unfold(text) { return text.replace(/\r?\n[ \t]/g, ""); }
 function valueOf(line) { const index = line.indexOf(":"); return index === -1 ? "" : line.slice(index + 1).trim(); }
 function cleanText(value) {
-  return value
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, "$2 ($1)")
-    .replace(/<[^>]*>/g, "")
-    .replace(/\\n/g, "\n")
-    .trim();
+  return value.replace(/<br\s*\/?>/gi, "\n").replace(/<a\s+[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/gi, "$2 ($1)").replace(/<[^>]*>/g, "").replace(/\\n/g, "\n").trim();
 }
 function extractUrl(value) {
-  const htmlUrl = value.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1];
-  const plainUrl = value.match(/https?:\/\/[^\s<>"')]+/i)?.[0];
-  return htmlUrl || plainUrl || "";
+  return value.match(/href=["'](https?:\/\/[^"']+)["']/i)?.[1] || value.match(/https?:\/\/[^\s<>"')]+/i)?.[0] || "";
 }
 function parseDate(raw) {
   const value = raw.replace(/[^0-9TZ]/g, "");
@@ -23,6 +16,7 @@ function parseDate(raw) {
   return null;
 }
 function parseEvents(ics) {
+  const now = Date.now();
   return unfold(ics).split("BEGIN:VEVENT").slice(1).map((block) => {
     const lines = block.split(/\r?\n/);
     const get = (name) => { const line = lines.find((item) => item.startsWith(name)); return line ? valueOf(line) : ""; };
@@ -38,7 +32,8 @@ function parseEvents(ics) {
       start: startLine ? parseDate(valueOf(startLine)) : null,
       end: endLine ? parseDate(valueOf(endLine)) : null,
     };
-  }).filter((event) => event.start).sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
+  }).filter((event) => event.start && new Date(event.end || event.start).getTime() >= now)
+    .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
 }
 export default async function handler(req, res) {
   try {
