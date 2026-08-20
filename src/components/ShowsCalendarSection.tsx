@@ -1,4 +1,4 @@
-import { CalendarDays, ExternalLink, MapPin, RefreshCw } from "lucide-react";
+import { CalendarDays, MapPin, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -11,9 +11,6 @@ type ShowEvent = {
   start: string;
   end?: string;
 };
-
-const calendarUrl =
-  "https://calendar.google.com/calendar/embed?src=thewatsonshow%40gmail.com&ctz=America%2FNew_York";
 
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat("en-US", {
@@ -64,16 +61,12 @@ const ShowsCalendarSection = () => {
               <p className="mb-3 text-sm text-muted-foreground">{formatTime(event.start)}{event.end ? ` – ${formatTime(event.end)}` : ""}</p>
               {event.location && <p className="mb-3 flex items-start gap-2 text-sm text-muted-foreground"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{event.location}</p>}
               {event.description && <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">{event.description}</p>}
-              {event.url && <a href={event.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold uppercase tracking-wide text-primary hover:text-primary/80">Event details →</a>}
+              {event.url && <a href={event.url} className="text-sm font-semibold uppercase tracking-wide text-primary hover:text-primary/80">Event details →</a>}
             </article>
           )) : (
             <div className="card-theatrical col-span-full p-12 text-center text-muted-foreground">New show dates are coming soon. Check back for updates.</div>
           )}
         </motion.div>
-
-        <div className="mt-8 text-center">
-          <a href={calendarUrl} target="_blank" rel="noopener noreferrer" className="btn-outline-gold gap-2">View full calendar <ExternalLink className="h-4 w-4" aria-hidden="true" /></a>
-        </div>
       </div>
     </section>
   );
