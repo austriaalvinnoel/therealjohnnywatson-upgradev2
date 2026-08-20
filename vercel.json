@@ -38,6 +38,10 @@
     { "source": "/fundraiser-comedian/", "destination": "/fundraiser-comedian", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/new-jersey-comedian", "destination": "/new-jersey-comedian/index.html" },
+    { "source": "/corporate-comedian", "destination": "/corporate-comedian/index.html" },
+    { "source": "/party-comedian", "destination": "/party-comedian/index.html" },
+    { "source": "/fundraiser-comedian", "destination": "/fundraiser-comedian/index.html" },
     { "source": "/((?!admin).*)", "destination": "/index.html" }
   ]
 }
