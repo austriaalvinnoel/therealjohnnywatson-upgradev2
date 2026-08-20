@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 type ShowEvent = { id: string; title: string; location?: string; description?: string; url?: string; start: string; end?: string; allDay?: boolean; };
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric", timeZone: "America/New_York" });
-const formatDate = (value: string) => dateFormatter.format(new Date(value));
+const formatTimedDate = (value: string) => dateFormatter.format(new Date(value));
+const formatAllDayDate = (value: string) => dateFormatter.format(new Date(`${value.slice(0, 10)}T12:00:00-04:00`));
 const formatDateRange = (start: string, end?: string) => {
-  if (!end) return formatDate(start);
+  if (!end) return formatAllDayDate(start);
   const endDate = new Date(end);
-  endDate.setDate(endDate.getDate() - 1);
-  const startDate = new Date(start);
-  const startText = formatDate(startDate.toISOString());
-  const endText = formatDate(endDate.toISOString());
+  endDate.setUTCDate(endDate.getUTCDate() - 1);
+  const startText = formatAllDayDate(start);
+  const endText = formatAllDayDate(endDate.toISOString());
   return startText === endText ? startText : `${startText} – ${endText}`;
 };
 const formatTime = (value: string) => new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/New_York" }).format(new Date(value));
@@ -36,7 +36,7 @@ const ShowsCalendarSection = () => {
         <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55, delay: 0.08 }} className="grid gap-5 md:grid-cols-2">
           {loading ? <div className="card-theatrical col-span-full flex items-center justify-center gap-3 p-12 text-muted-foreground"><RefreshCw className="h-5 w-5 animate-spin" /> Loading show dates…</div> : events.length ? events.map((event) => (
             <article key={event.id} className="card-theatrical border-l-4 border-l-primary p-6">
-              <div className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-primary">{event.allDay ? formatDateRange(event.start, event.end) : formatDate(event.start)}</div>
+              <div className="mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-primary">{event.allDay ? formatDateRange(event.start, event.end) : formatTimedDate(event.start)}</div>
               <h3 className="mb-2 text-2xl font-bold">{event.title}</h3>
               {!event.allDay && <p className="mb-3 text-sm text-muted-foreground">{formatTime(event.start)}{event.end ? ` – ${formatTime(event.end)}` : ""}</p>}
               {event.location && <p className="mb-3 flex items-start gap-2 text-sm text-muted-foreground"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{event.location}</p>}
