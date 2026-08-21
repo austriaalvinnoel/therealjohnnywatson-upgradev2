@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import contactData from "../content/contact.json";
 
-const WEB3FORMS_KEY = "4c4f0343-dd53-4037-93e2-942ee699458e";
+const WEB3FORMS_KEY = "2dc87688-358a-4b58-ab49-0092d71cf45f";
 
 const ContactSection = () => {
   const ref = useRef(null);
@@ -78,7 +78,6 @@ const ContactSection = () => {
           email: formData.email,
           subject: `Booking Inquiry: ${formData.eventType} — ${formData.eventDate}`,
           message: bookingDetails,
-          ccemail: "thewatsonshows@gmail.com",
           botcheck: false,
         }),
       });
