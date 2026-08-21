@@ -78,7 +78,7 @@ const ContactSection = () => {
           email: formData.email,
           subject: `Booking Inquiry: ${formData.eventType} — ${formData.eventDate}`,
           message: bookingDetails,
-          cc: "thewatsonshows@gmail.com",
+          ccemail: "thewatsonshows@gmail.com",
           botcheck: false,
         }),
       });
