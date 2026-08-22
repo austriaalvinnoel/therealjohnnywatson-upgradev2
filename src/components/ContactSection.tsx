@@ -76,7 +76,7 @@ const ContactSection = () => {
           access_key: WEB3FORMS_KEY,
           name: formData.name,
           email: formData.email,
-          subject: `Booking Inquiry: ${formData.eventType} — ${formData.eventDate}`,
+          subject: `Booking Inquiry: ${formData.name} — ${formData.eventType} — ${formData.eventDate}`,
           message: bookingDetails,
           botcheck: false,
         }),
